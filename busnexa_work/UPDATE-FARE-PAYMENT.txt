@@ -1,0 +1,10 @@
+NIGHTROUTE FARE + DEMO PAYMENT UPDATE
+
+- Bus cards now display an estimated per-passenger fare.
+- Fare calculation: base fare = max(₹80, ₹2.20 per km); GST = 5% of base fare; reservation fee = ₹15; convenience fee = 2% of base fare. Amounts are rounded to the nearest rupee.
+- Booking details lead to a fare breakdown and a Pay button.
+- Pay generates a QR code containing a NightRoute demo-payment reference. It is NOT a UPI QR and cannot transfer money.
+- “Complete demo payment” simulates success and saves the booking and amount in booking history. No actual payment is processed.
+- The QR library is installed automatically with npm install because it is listed in client/package.json.
+
+For a real payment gateway, integrate a regulated provider (such as Razorpay) on the server, create payment orders server-side, verify signatures/webhooks, and never trust a browser-only “paid” button.

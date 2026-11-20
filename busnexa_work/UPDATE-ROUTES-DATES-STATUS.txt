@@ -1,0 +1,12 @@
+NIGHTROUTE UPDATE — INDIA-WIDE SEARCH, ROUTE OPTIONS AND COACH TYPES
+
+- Removed the incorrect default that appended Karnataka to every unknown location.
+- Location lookup now searches across India with Nominatim and tries Photon as a secondary fallback; known sample localities remain available offline.
+- Requests up to three OSRM alternative road paths.
+- Each available path produces AC Sleeper and Non-AC Seater demo variants with distinct illustrative service brands and different fare rates.
+- Adds approximate intermediate route waypoints along the displayed map path. These are explicitly not verified bus stops.
+- Rejects journeys above the 2,000 km road-distance cap when the road service can establish that distance, and provides a split-journey message.
+- Animated bus markers continue to move along route geometry based on simulated schedule progress.
+
+DATA HONESTY
+Bus brands, service numbers, departure/arrival times, availability and fares are demo examples. Bus movement is simulated, not GPS. Real operator schedules, prices, service IDs and live tracking require authorized operator/aggregator APIs and GPS/AVL feeds. A village absent from map databases cannot be geocoded automatically; users may need to add its district or nearest mapped town.

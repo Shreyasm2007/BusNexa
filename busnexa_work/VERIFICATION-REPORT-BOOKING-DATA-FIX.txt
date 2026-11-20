@@ -1,0 +1,25 @@
+BUSNEXA VERIFICATION REPORT — 19 NOVEMBER 2026
+
+PASS
+- App.jsx parsed successfully with the TypeScript JSX parser.
+- client/src/data.js parsed successfully.
+- server/index.js passed `node --check`.
+- Backend POST /api/bookings enforces a 100 km minimum and a 3-hour booking cutoff.
+- Frontend booking eligibility uses the same 100 km / 3-hour policy.
+- Booking is blocked again when opening the form, continuing to payment, generating the QR, and completing the demo payment.
+- Removed the previous 4-hour filter that hid already-departed services.
+- Today's generated service list retains trips whose estimated arrival is still in the future and omits completed trips.
+- Service cards identify generated timetable information as DEMO SCHEDULE — NOT OPERATOR VERIFIED.
+- Added data-source coverage notes for official and community GTFS feeds and their limitations.
+
+NOT VERIFIED
+- Full Vite production build was not run because `npm install --no-audit --no-fund` timed out and Vite was not available in the environment.
+- No real GTFS feed has been imported into the live search in this update. The source register documents available feeds and integration requirements; current schedule cards remain demonstration data.
+- No live GPS, real-time seat inventory, actual operator fares or real payment integration are connected.
+
+MANUAL TEST CASES
+1. Search a route of 99 km: booking button should be disabled with the 100 km explanation.
+2. Search a route of 100 km with 3 hours or more remaining: booking can be opened (subject to demo seat availability).
+3. Search a route with less than 3 hours remaining: booking button should be disabled.
+4. Search a route with a departure earlier today and estimated arrival later than now: card should remain visible and show Departed.
+5. Search a route with an arrival time earlier than now: completed service should not appear in today's active results.

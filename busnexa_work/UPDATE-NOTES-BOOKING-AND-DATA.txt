@@ -1,0 +1,26 @@
+BUSNEXA UPDATE — BOOKING WINDOW, TODAY'S SERVICES AND DATA TRANSPARENCY
+
+1. Booking policy
+   - Minimum journey distance changed to 100 km.
+   - Booking is blocked when fewer than 3 hours remain before departure, including already-departed services.
+   - The UI shows a disabled booking button and the reason.
+   - openBooking, payment progression and the backend POST /api/bookings endpoint recheck the policy.
+
+2. Today's search results
+   - Removed the old 4-hour-ahead filter that hid buses that had already departed.
+   - For today's search, include services whose estimated arrival is still in the future. This includes active/departed services and upcoming/scheduled services.
+   - Completed services are omitted from today's active results.
+   - Future-date searches retain scheduled sample departures.
+
+3. Data transparency
+   - Each generated service is labelled DEMO SCHEDULE — NOT OPERATOR VERIFIED.
+   - Results explain that map geometry may come from OpenStreetMap/OSRM, while service names, service numbers, schedules, fares and vehicle movement are simulated.
+   - Added DATA-SOURCES-AND-COVERAGE.md with identified public GTFS sources and limitations across Indian states.
+   - No claim is made that the current app has imported every state's data. No complete national real-time bus feed was found.
+
+4. Verification still required
+   - Run npm install in client and server folders if dependencies are not installed.
+   - Run npm run build in client.
+   - Run node --check server/index.js in server.
+   - Test a 99 km journey (booking blocked), a 100 km journey with >=3 hours remaining (booking can open), and a journey with <3 hours remaining (booking blocked).
+   - Test today's service list both before and after a departure time; active services should remain visible until estimated arrival.

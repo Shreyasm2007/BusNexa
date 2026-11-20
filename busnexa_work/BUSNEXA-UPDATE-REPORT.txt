@@ -1,0 +1,32 @@
+BUSNEXA APP.JSX UPDATE NOTES
+
+Changes made:
+1. Fixed a JSX syntax error in App.jsx: the selectedSeats.map() expression was missing its closing parenthesis. This was the parse/build error found in the uploaded source.
+2. Previous-seven-day replay now displays estimated waypoint arrival times, estimated elapsed time and distance covered as the slider is dragged.
+3. Added one or two stable red crowd-risk markers to intermediate route waypoints and matching timeline indicators.
+4. Removed the review submission form and local user-generated review storage.
+5. Added published survey insight cards and an explicitly labelled indicative 3.7/5 satisfaction display. It is not a service-specific verified rating.
+6. Added an About & guide page describing features, technologies, operation, survey evidence and demo limitations.
+7. Added a destination endpoint bus marker for departed/replayed journeys. Popup explains it is not the live bus position.
+8. Added defensive handling for missing stop arrays / indices in map and journey duration displays.
+9. Updated visible branding to BusNexa while retaining existing API/storage keys for compatibility.
+
+Survey sources:
+- CAG BMTC Performance Audit 2024: 2,079 survey respondents, about 73% satisfied, 61% reported overcrowded buses, 63% wanted increased frequency.
+- ITDP / Transport4All Stage-1 public transport survey analysis: crowding at stops and inside vehicles identified as discomfort factors.
+- Janaagraha 2023 Bus Stop Quality Survey: 39 Bengaluru bus stops assessed.
+
+Data integrity:
+- Generated service numbers, schedules, bus operators, fares and vehicle movement remain demo data.
+- Historical replay is not actual GPS history.
+- Intermediate map points are approximate route waypoints, not verified bus stops.
+- Red crowd markers are survey-informed illustrative indicators, not real-time or stop-specific crowd measurements.
+- Survey insights are general public transport findings and are not reviews of a specific generated service.
+
+Validation:
+- JSX syntax/transpilation check using the installed TypeScript JSX parser: PASS (zero diagnostics).
+- node --check client/src/data.js: PASS.
+- node --check server/index.js: PASS.
+- node --check ecosystem.config.cjs: PASS.
+- ZIP integrity check: PASS.
+- Full Vite production build: NOT RUN; npm install did not complete within the available 120-second validation window. Therefore a browser build/runtime test is not claimed.

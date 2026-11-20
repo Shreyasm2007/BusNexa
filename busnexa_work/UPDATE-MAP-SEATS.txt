@@ -1,0 +1,30 @@
+NIGHTROUTE UPDATE: MAP ANIMATION + BOOKED SEAT LOCKING
+
+WHAT CHANGED
+1. The bus marker now updates repeatedly while the map is open. Before departure it loops along the demo route; after departure it advances using the estimated journey elapsed time.
+2. The route line uses a faster animated dash effect and a glow to make movement easier to see.
+3. Seat availability is loaded from the backend for the selected service number and travel date.
+4. Seats already confirmed for that service/date display a red blocked pattern, a cross and BOOKED label, and cannot be selected.
+5. When payment is completed, the seat is saved in the backend booking file. If two users attempt the same seat, the server rejects the second booking.
+
+IMPORTANT
+- Bus movement is simulated. It is not real GPS tracking.
+- Booked-seat status is shared through this project's backend JSON storage. Keep the backend running. For a deployed multi-user production system, use a database with transaction/unique constraints.
+- Existing bookings are not modified. Only confirmed bookings with matching service number and date block seats.
+
+RUN
+Backend terminal:
+  cd server
+  npm install
+  npm run dev
+
+Frontend terminal:
+  cd client
+  npm install
+  npm run dev
+
+TEST SEAT LOCKING
+1. Sign in and search for a bus.
+2. Click Book Journey and select an available seat.
+3. Complete the demo payment and confirm.
+4. Open the same service/date booking form again. The confirmed seat should show BOOKED and be disabled.

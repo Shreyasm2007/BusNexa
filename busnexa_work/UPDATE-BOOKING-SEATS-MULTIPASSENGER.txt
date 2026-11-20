@@ -1,0 +1,10 @@
+NIGHTROUTE UPDATE — STABLE SERVICES, 40 SEATS & MULTI-PASSENGER BOOKING
+
+1. Service identity is now deterministic for the same origin, destination, coach type, route variant and departure time. Repeating the same search therefore reuses the same service number instead of generating a new random number. Seat inventory is stored by service number + travel date on the backend and is shared across accounts.
+2. All coaches in this demo use a 40-seat layout: 10 rows, two seats on the left, a centre aisle, and two seats on the right. W marks window seats. Booked seats are visibly blocked; cancelled seats are released because inventory counts only active bookings.
+3. Passengers can select multiple seats. The form creates a name and 10-digit phone field for each selected seat, calculates the total fare for all passengers, and saves one booking record per passenger/seat.
+4. Cancellation is available until departure. Less than two hours before departure, cancellation is permitted with zero refund. Earlier cancellations use the existing demo deduction slabs. A positive refund is marked as transferred to the bank account in the app's status, but this remains a demo status only: the app does not connect to a bank or payment gateway and no actual transfer takes place.
+5. Every booking row represents one passenger and one seat, so users can cancel individual seats from Journey History. The same service number/date inventory makes the seat available again after cancellation.
+
+IMPORTANT LIMITATION
+The route search and bus schedules are simulated. The stable service number is stable for an identical generated route search, not an authenticated real-world operator fleet ID. Real cross-route bus identity and real bank refunds require operator timetable/fleet data and a payment-gateway integration. Existing local JSON booking data is preserved; old bookings created against previous random service numbers remain under those previous IDs.

@@ -1,0 +1,9 @@
+Static checks performed:
+- `node --check server/index.js` passed.
+- Booking GET returns booked seat labels and available/total counts scoped to service number and travel date.
+- Booking POST validates the seat against the requested coach layout and rejects an already-confirmed seat with HTTP 409.
+- Frontend disables booked seats, disables the booking action when the service is full, and displays distinct 2+1 sleeper / 2+2 seater maps.
+
+Not completed in this environment:
+- Vite production build and browser end-to-end test: npm dependency installation timed out, so these checks could not be run.
+- No real operator seat-inventory API is connected; generated services and inventory are demo data.

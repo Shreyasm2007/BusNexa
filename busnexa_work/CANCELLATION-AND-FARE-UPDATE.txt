@@ -1,0 +1,15 @@
+NIGHTROUTE UPDATE — CANCELLATION, SEATS, FARES AND TIMETABLES
+
+1. Journey History now displays Cancel journey for active confirmed demo bookings.
+2. Cancellation asks for confirmation and previews the estimated refund. The API validates the booking owner and cancellation window, marks the booking Cancelled, and releases the seat because seat availability counts only Confirmed bookings.
+3. Refund reference is based on the published KSRTC cancellation terms: 10% cancellation fee up to 72 hours; 25% from 72 to 24 hours; 50% from 24 hours to 2 hours; no cancellation/refund inside 2 hours. The reservation fee is non-refundable. The published policy also has an earlier tripsheet cutoff; this demo cannot access operator tripsheet status and therefore uses the 2-hour cutoff.
+4. The Travel Guide explains the policy and clearly identifies it as a KSRTC reference, not a universal policy for all operators. Refund is only calculated in demo mode; no real payment gateway or bank refund is connected.
+5. Seater coach layout now shows 2 seats + a centre aisle + 2 seats, with numbered row/seat labels. Sleeper layout remains representative.
+6. Fare minimum reduced from Rs.80 to Rs.35 and the per-km rates were moderated. Routes of 2 km or more can now be booked instead of enforcing a 150 km minimum.
+7. Generated services now use varied minute-specific departure times (for example 02:35, 04:44, 07:18, 11:26, 15:43, 19:12, 22:37), and same-day departures less than 4 hours away are filtered out.
+
+DATA / LIMITATIONS
+- KSRTC policy source: https://www.ksrtc.in/reservation-terms
+- Bus names, service numbers and generated schedules in this app are demonstration data, not verified live operator inventory.
+- Road geometry is retrieved from OpenStreetMap/OSRM when available. This does not verify a bus operator's actual route, departure time or live GPS location.
+- Real cancellation/refund execution requires operator-specific policy data, trip-sheet status and a connected payment gateway.

@@ -1,0 +1,21 @@
+BUSNEXA — MULTI-CORRIDOR ROUTE AND SINGLE BUS MARKER UPDATE
+
+Implemented
+1. Route discovery now combines OSRM alternative routes with up to three candidate intermediate-town waypoint requests selected near the origin-destination corridor.
+2. The route engine validates that returned paths connect the requested endpoints, have plausible road distance and have distinct geometry. It displays up to three route variants.
+3. Where a via-town path is returned, the town appears as a named route waypoint. It is explicitly not labelled as a confirmed bus stop.
+4. Each route variant receives a 20-minute departure offset from the previous variant (0, 20 and 40 minutes). These are generated demo schedules, not operator timetables.
+5. Each route's road distance is used in the fare calculation, so different route distances can produce different estimated fares.
+6. The duplicate fixed endpoint bus icon was removed. Only the moving simulated bus marker remains.
+7. Stops behind the moving bus are marked as crossed, with approaching/upcoming stops styled separately.
+
+Limitations to explain honestly
+- OpenStreetMap provides map data and OSRM provides car-road routing. Neither proves that an actual bus operator serves the selected corridor.
+- No complete all-India bus timetable database or live GPS feed is connected.
+- Demo service names, service numbers, timings, fare rates, seat inventory and bus movement remain simulated.
+- Public OSRM may return fewer than three alternatives or rate-limit waypoint requests.
+- No full Vite production build or live network integration test was possible in this environment.
+
+Checks completed
+- Node syntax checks: server/index.js and client/src/data.js.
+- JSX parser check: client/src/App.jsx.

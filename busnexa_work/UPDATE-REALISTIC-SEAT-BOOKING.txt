@@ -1,0 +1,21 @@
+NIGHTROUTE – COACH SEAT MAP & AVAILABILITY UPDATE
+
+WHAT CHANGED
+- AC Sleeper services display a representative Indian 2+1 sleeper berth plan (24 berths: lower, upper and single berth positions per row).
+- Non-AC Seater services display a representative Indian 2+2 seat plan (40 seats across 10 rows).
+- The coach front/driver and rear are marked, and the aisle is shown in the seater map.
+- Seat availability is loaded separately for each generated service number and journey date.
+- Seats already confirmed for that exact service/date are disabled and marked BOOKED.
+- The service-card booking button is disabled when all seats for that coach/date are booked (and while availability is being checked).
+- The server validates seat labels against the coach type and checks availability again at confirmation, so a seat taken by another user after the seat map loads is rejected.
+
+IMPORTANT DATA LIMITATION
+NightRoute currently creates demo service numbers and demo coach types. There is no connected operator inventory, bus registration/fleet identifier, or operator seat-map feed. Therefore these are representative conventional Indian coach layouts, not a claim that a particular named operator's exact bus has this exact seat arrangement. Exact vehicle-specific maps and real inventory need an operator/aggregator API.
+
+BOOKING DATA
+Bookings remain stored in server/data/bookings.json and are keyed by service number, travel date and seat number. The API prevents a second confirmed booking for the same seat/service/date. This project still uses demo payment only; no real payment is collected.
+
+RUN
+1. Start the backend using the existing START-NIGHTROUTE.bat or `cd server && npm install && npm start`.
+2. Start the frontend in a second terminal using `cd client && npm install && npm run dev`.
+3. Sign in, search a journey, then select Book journey to view the coach layout.

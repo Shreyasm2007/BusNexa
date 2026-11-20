@@ -1,0 +1,44 @@
+NIGHTROUTE UPDATE NOTES - 16 NOVEMBER 2026
+
+Reliability
+- Added START-NIGHTROUTE.bat to install dependencies when needed and open backend/frontend terminals.
+- Added ecosystem.config.cjs for PM2 process supervision and automatic restart after crashes.
+- Backend health endpoint now reports uptime and timestamp.
+- Backend port is configurable through PORT.
+- Public geocoding and road-routing requests now time out instead of waiting indefinitely.
+
+Bus route history
+- Each selected bus route view includes a seven-day date selector and animated route replay slider.
+- The replay follows the saved road geometry.
+- IMPORTANT: replay dates are demonstration playback only. They are not actual past-week GPS records.
+- Real-time and historical GPS need an authorized bus operator/device GPS or AVL integration that supplies timestamped coordinates. No such feed or credentials were supplied in this project.
+
+Existing demo limitations remain: generated service names/numbers, schedules, fares, seats and bookings are not verified operator inventory.
+
+
+STORAGE QUOTA FIX (v3)
+- Replaced the unbounded/full-object localStorage service registry with a compact index of the latest 12 services.
+- Route coordinates saved with service history are downsampled to at most about 80 points.
+- Removed the oversized legacy nr_demo_services_v2 key on startup and after successful writes.
+- Route history cache now keeps at most 8 recent origin/destination pairs and reduces each path to at most about 180 points.
+- Route cache entries older than 30 days are ignored.
+- Storage quota errors are caught; active searches continue even if optional history cannot be saved.
+- These are browser-local demo records. This does not add real operator schedules or GPS history.
+
+
+MAJESTIC → BALLARI ROAD-PATH CORRECTION
+- Added precise known-place resolution for Majestic / Kempegowda Bus Station and Ballari / Bellary, including bus-terminal aliases.
+- Invalidated older route-cache versions so previously cached mis-geocoded or straight-line paths cannot be reused.
+- Added route endpoint and plausible road-distance checks before accepting OSRM road geometry.
+- Removed the straight-line fallback from route discovery and map previews. If road routing is unavailable, NightRoute now explains that it cannot verify the road path instead of drawing a misleading line.
+- The route remains a road-network estimate from OpenStreetMap/OSRM, not a confirmed bus operator route or live GPS track.
+
+ROUTE ENGINE REBUILD (16 NOV 2026)
+- Removed the legacy curated-route search shortcut from the main bus search flow. All searches now use the same geocoding + OSRM road-routing pipeline.
+- Curated sample routes are retained only for the Travel Guide and no longer override arbitrary origin/destination searches.
+- Improved Nominatim result selection: prefer exact settlement-name matches, Indian results, and settlement feature types; reject uncertain/non-Indian matches rather than silently choosing the first result.
+- Route candidates are endpoint-validated, checked against straight-line plausibility and the 2,000 km road-distance limit, sorted by fastest travel time, then shortest distance, then remaining distinct alternatives.
+- Similar route geometries are de-duplicated. No straight-line fallback is drawn when the road router fails.
+- Static syntax checks pass for data.js and server/index.js.
+- Live routing test could not run in this build environment because external network access to Nominatim/OSRM was unavailable. Run the app with internet access to validate live road results. OSRM may return fewer than three alternatives for some journeys.
+- Actual bus timetables, operators, fares, GPS and past-week tracking remain demo-only without authorized operator feeds.

@@ -1,0 +1,47 @@
+NIGHTROUTE UPDATE VERIFICATION REPORT
+Date: 16 November 2026
+
+Changes included
+- Added a seven-day route replay panel for each selected bus service.
+- Added date selection and a playback slider to animate the bus along the saved road geometry.
+- Clearly labelled the replay as DEMO REPLAY; no false GPS history is claimed.
+- Added a Windows launcher that opens backend and frontend processes in separate terminals.
+- Added PM2 process configuration for automatic restart after a process crash.
+- Added API health uptime and configurable backend port.
+- Added timeouts to geocoding and OSRM routing requests.
+
+Validation completed
+- node --check server/index.js: PASS.
+- node --check client/src/data.js: PASS.
+- node --check ecosystem.config.cjs: PASS.
+- TypeScript JSX parser/transpilation check for client/src/App.jsx: PASS.
+- ZIP archive integrity check: PASS (after packaging).
+
+Validation not completed
+- npm install in the frontend timed out in this environment.
+- Full Vite production build and browser end-to-end test could not be run because dependencies could not be installed here.
+- The Windows batch launcher and PM2 process lifecycle were inspected but not executed on Windows in this environment.
+
+GPS/data integrity limitation
+No authorized operator/device GPS or AVL feed, API credentials, or historical telemetry records were supplied. Therefore the seven-day panel replays the known route geometry as a clearly labelled simulation. It is not a real record of a bus's past movements. Actual live positions and actual past-week tracks require operator/device GPS integration, timestamped records, authorization, and a persistent telemetry store.
+
+Existing demo limitations
+Bus operators, service numbers, schedules, departure states, fares, seat inventory and payment remain illustrative demo data, not verified real-world inventory.
+
+
+STORAGE QUOTA PATCH
+- Reviewed the reported nr_demo_services_v2 setItem failure.
+- Replaced 150 full service objects with 12 compact service-index records.
+- Added cleanup for legacy oversized service and route-history keys.
+- Added guarded writes and route-cache bounds.
+- Static Node syntax checks are run on data.js and server/index.js.
+- Full browser/Vite build still requires npm dependency installation on the user's machine.
+
+
+MAJESTIC → BALLARI ROUTE CORRECTION
+- Static Node syntax check for client/src/data.js: PASS.
+- Mocked OSRM integration test: PASS; Majestic resolves to Kempegowda Bus Station coordinates (12.97679, 77.57260), Ballari resolves to (15.1394, 76.9214), and a test road geometry is accepted with a 276 km sample distance. This is a mocked test, not a live OSRM request.
+- Route geometry endpoint checks and plausible distance filtering: added.
+- Straight-line route fallback: removed from both India-wide route generation and map preview.
+- Live OSRM availability, actual live road geometry, Vite production build, and browser end-to-end tests: NOT VERIFIED in this environment.
+- Real bus schedules, operator services, fares, and GPS positions remain demo data unless connected to authorized operator/GPS feeds.

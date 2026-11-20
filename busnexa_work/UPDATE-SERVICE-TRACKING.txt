@@ -1,0 +1,26 @@
+NIGHTROUTE SERVICE NUMBER + DEPARTED BUS UPDATE
+
+WHAT CHANGED
+1. Every bus result now receives a unique random demo service number in the format NR-123456.
+2. Generated service records are saved in this browser's localStorage, so the Track Service page can find numbers generated earlier on the same browser/device.
+3. Entering a saved service number opens its route, stop list, departure/arrival time estimates and map.
+4. If the departure time has passed, the map marker is placed progressively along the route based on elapsed time and estimated journey duration. The map caption shows the estimated percentage travelled.
+5. Existing route-card and map animations are retained.
+
+HOW TO RUN
+Open the project folder containing client and server in VS Code.
+Terminal 1:
+  cd server
+  npm install
+  npm run dev
+Terminal 2:
+  cd client
+  npm install
+  npm run dev
+
+IMPORTANT LIMITS
+- NR-xxxxxx numbers are generated demo identifiers, not official KSRTC/BMTC/private operator service numbers.
+- Departed bus positions are simulated from the scheduled departure time and estimated duration. They are NOT GPS/live tracking.
+- Generated service numbers are saved only in the same browser's localStorage. Clearing browser data or using another browser/device removes/does not share that demo registry.
+- India-wide locality lookup still depends on OpenStreetMap geocoding coverage and internet access. It cannot guarantee every named hamlet, street or bus stop exists in the map database.
+- Timings and route waypoints for generated journeys are estimates, not confirmed operator stops or schedules.

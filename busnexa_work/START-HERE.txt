@@ -1,0 +1,20 @@
+NIGHTROUTE - START HERE
+
+1. Extract the ZIP file.
+2. Open the extracted nrfix folder in VS Code.
+3. Install Node.js 18 or newer.
+4. Double-click START-NIGHTROUTE.bat. The first run installs dependencies and opens two terminal windows.
+5. Keep both terminal windows open and visit http://localhost:5173.
+6. Check backend status at http://localhost:5000/api/health.
+
+For automatic restart after a process crash:
+  npm install --global pm2
+  pm2 start ecosystem.config.cjs
+  pm2 status
+  pm2 logs
+  pm2 restart all
+  pm2 stop all
+
+PM2 restarts a crashed process while your computer is running. It cannot keep the local app online when the laptop is shut down, asleep, disconnected from the internet, or when the public map/geocoding services are unavailable.
+
+The seven-day service panel is a simulated route replay using the saved road geometry. It is NOT historical GPS data. Real historical/live vehicle tracking requires authorized operator GPS/AVL feeds.
